@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrated IoT Systems Design - Smart Livestock Monitoring</title>
+    <link rel="stylesheet" href="task7.css">
+    <script src="task7.js" defer></script>
+</head>
+<body>
+
+    <!-- Nav Header (Hidden in Print) -->
+    <header class="nav-header">
+        <div class="nav-container">
+            <div class="nav-title">IoT Systems Design (Assignment 7)</div>
+            <nav class="tab-bar">
+                <button class="tab-button active" data-tab="all">Full Report</button>
+                <button class="tab-button" data-tab="dfd">1. DFD</button>
+                <button class="tab-button" data-tab="uml">2. UML</button>
+                <button class="tab-button" data-tab="java">3. Java</button>
+                <button class="tab-button" data-tab="erd">4. ERD</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Floating Action (Hidden in Print) -->
+    <div class="floating-actions">
+        <button class="action-btn" onclick="window.print()">Print Report</button>
+    </div>
+
+    <!-- Document Container -->
+    <div class="document-container">
+
+        <!-- COVER PAGE (Always visible in Full Report, acts as first page) -->
+        <div class="tab-content active" id="cover">
+            <div class="writeup-paper">
+                <div class="cover-page">
+                    <div>
+                        <img src="../nustlogo.png" alt="NUST Logo" class="academic-logo" width="100" onerror="this.style.display='none'">
+                        <div class="institution-title">National University of Science &amp; Technology</div>
+                        <div class="faculty-title">Faculty of Applied Science &bull; Computer Science</div>
+                    </div>
+                    
+                    <div class="document-title-block">
+                        <h1 class="document-title">Smart Livestock Monitoring &amp; Control System</h1>
+                        <div class="document-subtitle">Integrated IoT Systems Design Specification</div>
+                    </div>
+
+                    <div class="personal-details">
+                        <table>
+                            <tr>
+                                <td class="label">Student Name:</td>
+                                <td class="field-line">[Student Name]</td>
+                            </tr>
+                            <tr>
+                                <td class="label">Student ID:</td>
+                                <td class="field-line">[Student ID]</td>
+                            </tr>
+                            <tr>
+                                <td class="label">Course Name:</td>
+                                <td class="field-line">[Course Name &amp; Code]</td>
+                            </tr>
+                            <tr>
+                                <td class="label">Date:</td>
+                                <td class="field-line">[Submission Date]</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 1: DATA FLOW DIAGRAM -->
+        <div class="tab-content active" id="dfd">
+            <div class="writeup-paper section-page">
+                <h2>1. Data Flow Diagram (Level 1)</h2>
+                <p class="brief-note">Hover over entities, processes, or data stores to highlight their incoming and outgoing data flows.</p>
+                <p>
+                    The Level 1 Data Flow Diagram (DFD) maps the functional boundaries of the Smart Livestock Monitoring System. It describes the routing of data from collar sensors through processing engines to administrative and user actors, supported by persistent storage.
+                </p>
+
+                <div class="diagram-container">
+                    <svg width="1000" height="600" viewBox="0 0 1000 600">
+                        <defs>
+                            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#1a1a1a" />
+                            </marker>
+                        </defs>
+                        <rect width="1000" height="600" fill="#ffffff" stroke="#262626" stroke-width="1" />
+
+                        <!-- EXTERNAL ENTITIES -->
+                        <g class="external-entity" id="ee_admin">
+                            <rect x="30" y="70" width="140" height="60" rx="3" />
+                            <text x="100" y="105" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">System Admin</text>
+                        </g>
+                        
+                        <g class="external-entity" id="ee_farmer">
+                            <rect x="30" y="300" width="140" height="60" rx="3" />
+                            <text x="100" y="335" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">Farmer</text>
+                        </g>
+
+                        <g class="external-entity" id="ee_device">
+                            <rect x="30" y="500" width="140" height="60" rx="3" />
+                            <text x="100" y="535" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">IoT Smart Collar</text>
+                        </g>
+
+                        <!-- PROCESSES -->
+                        <!-- P1: Manage Records -->
+                        <g class="process-box" id="p1">
+                            <rect x="420" y="50" width="220" height="85" rx="5" />
+                            <line x1="420" y1="75" x2="640" y2="75" stroke="#262626" stroke-width="1" />
+                            <line x1="470" y1="50" x2="470" y2="75" stroke="#262626" stroke-width="1" />
+                            <text x="445" y="67" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">1.0</text>
+                            <text x="555" y="66" text-anchor="middle" font-family="Arial" font-size="9" font-style="italic">Admin Subsystem</text>
+                            <text x="530" y="103" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">Manage Records</text>
+                        </g>
+
+                        <!-- P2: Monitor Livestock -->
+                        <g class="process-box" id="p2">
+                            <rect x="420" y="200" width="220" height="85" rx="5" />
+                            <line x1="420" y1="225" x2="640" y2="225" stroke="#262626" stroke-width="1" />
+                            <line x1="470" y1="200" x2="470" y2="225" stroke="#262626" stroke-width="1" />
+                            <text x="445" y="217" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">2.0</text>
+                            <text x="555" y="216" text-anchor="middle" font-family="Arial" font-size="9" font-style="italic">Tracking Engine</text>
+                            <text x="530" y="253" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">Monitor Livestock</text>
+                        </g>
+
+                        <!-- P3: Generate Alerts -->
+                        <g class="process-box" id="p3">
+                            <rect x="420" y="350" width="220" height="85" rx="5" />
+                            <line x1="420" y1="375" x2="640" y2="375" stroke="#262626" stroke-width="1" />
+                            <line x1="470" y1="350" x2="470" y2="375" stroke="#262626" stroke-width="1" />
+                            <text x="445" y="367" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">3.0</text>
+                            <text x="555" y="366" text-anchor="middle" font-family="Arial" font-size="9" font-style="italic">Alert System</text>
+                            <text x="530" y="403" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">Generate Alerts</text>
+                        </g>
+
+                        <!-- P4: Analyze Historical Data -->
+                        <g class="process-box" id="p4">
+                            <rect x="420" y="490" width="220" height="85" rx="5" />
+                            <line x1="420" y1="515" x2="640" y2="515" stroke="#262626" stroke-width="1" />
+                            <line x1="470" y1="490" x2="470" y2="515" stroke="#262626" stroke-width="1" />
+                            <text x="445" y="507" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">4.0</text>
+                            <text x="555" y="506" text-anchor="middle" font-family="Arial" font-size="9" font-style="italic">Analytics Engine</text>
+                            <text x="530" y="543" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">Analyze Historical Data</text>
+                        </g>
+
+                        <!-- DATA STORES -->
+                        <!-- D1: Farmers DB -->
+                        <g class="data-store" id="ds1">
+                            <path d="M 940,65 L 780,65 L 780,110 L 940,110" fill="none" stroke="#262626" stroke-width="1.2" />
+                            <line x1="820" y1="65" x2="820" y2="110" stroke="#262626" stroke-width="1.2" />
+                            <text x="800" y="93" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">D1</text>
+                            <text x="880" y="92" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold">Farmers DB</text>
+                        </g>
+
+                        <!-- D2: Livestock DB -->
+                        <g class="data-store" id="ds2">
+                            <path d="M 940,170 L 780,170 L 780,215 L 940,215" fill="none" stroke="#262626" stroke-width="1.2" />
+                            <line x1="820" y1="170" x2="820" y2="215" stroke="#262626" stroke-width="1.2" />
+                            <text x="800" y="198" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">D2</text>
+                            <text x="880" y="197" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold">Livestock DB</text>
+                        </g>
+
+                        <!-- D3: Devices DB -->
+                        <g class="data-store" id="ds3">
+                            <path d="M 940,275 L 780,275 L 780,320 L 940,320" fill="none" stroke="#262626" stroke-width="1.2" />
+                            <line x1="820" y1="275" x2="820" y2="320" stroke="#262626" stroke-width="1.2" />
+                            <text x="800" y="303" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">D3</text>
+                            <text x="880" y="302" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold">Devices DB</text>
+                        </g>
+
+                        <!-- D4: Sensor Data Store -->
+                        <g class="data-store" id="ds4">
+                            <path d="M 940,390 L 780,390 L 780,435 L 940,435" fill="none" stroke="#262626" stroke-width="1.2" />
+                            <line x1="820" y1="390" x2="820" y2="435" stroke="#262626" stroke-width="1.2" />
+                            <text x="800" y="418" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">D4</text>
+                            <text x="880" y="417" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold">Sensor Store</text>
+                        </g>
+
+                        <!-- D5: Alerts DB -->
+                        <g class="data-store" id="ds5">
+                            <path d="M 940,505 L 780,505 L 780,550 L 940,550" fill="none" stroke="#262626" stroke-width="1.2" />
+                            <line x1="820" y1="505" x2="820" y2="550" stroke="#262626" stroke-width="1.2" />
+                            <text x="800" y="533" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">D5</text>
+                            <text x="880" y="532" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold">Alerts DB</text>
+                        </g>
+
+                        <!-- DATA FLOWS (ADMIN REGISTRATION) -->
+                        <g class="data-flow" data-source="ee_admin" data-target="p1">
+                            <path d="M 170,100 L 410,100" marker-end="url(#arrow)" />
+                            <text x="290" y="93" class="data-flow-text" text-anchor="middle">Registration Details</text>
+                        </g>
+                        <g class="data-flow" data-source="p1" data-target="ds1">
+                            <path d="M 640,75 L 770,75" marker-end="url(#arrow)" />
+                            <text x="705" y="68" class="data-flow-text" text-anchor="middle">Write Farmer</text>
+                        </g>
+                        <g class="data-flow" data-source="p1" data-target="ds2">
+                            <path d="M 640,110 Q 700,110 770,175" marker-end="url(#arrow)" />
+                            <text x="705" y="125" class="data-flow-text" text-anchor="middle">Write Livestock</text>
+                        </g>
+                        <g class="data-flow" data-source="p1" data-target="ds3">
+                            <path d="M 640,125 C 690,135 710,210 770,280" marker-end="url(#arrow)" />
+                            <text x="695" y="195" class="data-flow-text" text-anchor="middle">Write Device</text>
+                        </g>
+
+                        <!-- DATA FLOWS (REAL TIME MONITORING) -->
+                        <g class="data-flow" data-source="ee_device" data-target="p2">
+                            <path d="M 150,510 C 230,480 320,350 410,270" marker-end="url(#arrow)" />
+                            <text x="280" y="380" class="data-flow-text" text-anchor="middle">GPS &amp; Telemetry Stream</text>
+                        </g>
+                        <g class="data-flow" data-source="p2" data-target="ds4">
+                            <path d="M 640,242 C 700,272 730,332 770,395" marker-end="url(#arrow)" />
+                            <text x="700" y="300" class="data-flow-text" text-anchor="middle">Log Telemetry</text>
+                        </g>
+                        <g class="data-flow" data-source="ds2" data-target="p2">
+                            <path d="M 780,195 L 650,225" marker-end="url(#arrow)" />
+                            <text x="715" y="190" class="data-flow-text" text-anchor="middle">Zone Boundaries</text>
+                        </g>
+                        <g class="data-flow" data-source="p2" data-target="ee_farmer">
+                            <path d="M 420,235 L 180,315" marker-end="url(#arrow)" />
+                            <text x="290" y="255" class="data-flow-text" text-anchor="middle">Real-time Location Map</text>
+                        </g>
+
+                        <!-- DATA FLOWS (ALERTS) -->
+                        <g class="data-flow" data-source="p2" data-target="p3">
+                            <path d="M 530,285 L 530,340" marker-end="url(#arrow)" />
+                            <text x="540" y="317" class="data-flow-text">Telemetry Evaluation</text>
+                        </g>
+                        <g class="data-flow" data-source="p3" data-target="ds5">
+                            <path d="M 640,390 L 770,510" marker-end="url(#arrow)" />
+                            <text x="695" y="430" class="data-flow-text" text-anchor="middle">Log Alert Details</text>
+                        </g>
+                        <g class="data-flow" data-source="p3" data-target="ee_farmer">
+                            <path d="M 420,392 L 185,342" marker-end="url(#arrow)" />
+                            <text x="290" y="380" class="data-flow-text" text-anchor="middle">Straying / Inactivity Alerts</text>
+                        </g>
+
+                        <!-- DATA FLOWS (ANALYTICS) -->
+                        <g class="data-flow" data-source="ds4" data-target="p4">
+                            <path d="M 780,420 C 730,445 700,480 650,510" marker-end="url(#arrow)" />
+                            <text x="720" y="470" class="data-flow-text" text-anchor="middle">Historical Telemetry</text>
+                        </g>
+                        <g class="data-flow" data-source="ee_farmer" data-target="p4">
+                            <path d="M 140,365 C 200,405 300,465 410,520" marker-end="url(#arrow)" />
+                            <text x="280" y="445" class="data-flow-text" text-anchor="middle">Report Request</text>
+                        </g>
+                        <g class="data-flow" data-source="p4" data-target="ee_farmer">
+                            <path d="M 420,535 C 300,525 200,455 150,370" marker-end="url(#arrow)" />
+                            <text x="260" y="495" class="data-flow-text" text-anchor="middle">Livestock Activity Reports</text>
+                        </g>
+                    </svg>
+                </div>
+                <div class="diagram-caption">Figure 1: Level 1 Data Flow Diagram for Smart Livestock Monitoring System</div>
+
+                <h3>Data Flow Entities &amp; Operations</h3>
+                <p>
+                    The system isolates user operations from direct hardware telemetry. 
+                    <strong>Process 1.0 (Manage Records)</strong> acts as the central administrative system for setting up entities. 
+                    <strong>Process 2.0 (Monitor Livestock)</strong> constantly processes incoming GPS streams from devices, maps coordinates relative to bounding zones pulled from <strong>D2</strong>, and streams current locations to the farmer.
+                    <strong>Process 3.0 (Generate Alerts)</strong> acts on violations or flatlines, updating <strong>D5</strong> and notifying farmers immediately.
+                    <strong>Process 4.0 (Analyze Historical Data)</strong> aggregates geographic telemetry patterns for long-term reporting.
+                </p>
+            </div>
+        </div>
+
+        <!-- SECTION 2: UML CLASS DIAGRAM -->
+        <div class="tab-content active" id="uml">
+            <div class="writeup-paper section-page">
+                <h2>2. UML Class Diagram</h2>
+                <p class="brief-note">Hover over classes to highlight their relationships and multiplicity.</p>
+                <p>
+                    The UML class diagram provides the structural blueprint of the system, implementing object-oriented concepts like inheritance, aggregation, and associations to model the domain entity layers.
+                </p>
+
+                <div class="diagram-container">
+                    <svg width="1000" height="550" viewBox="0 0 1000 550">
+                        <defs>
+                            <marker id="hollow-arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 z" fill="#ffffff" stroke="#1a1a1a" stroke-width="1" />
+                            </marker>
+                            <marker id="diamond" viewBox="0 0 12 12" refX="0" refY="6" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+                                <path d="M 0 6 L 6 0 L 12 6 L 6 12 z" fill="#ffffff" stroke="#1a1a1a" stroke-width="1" />
+                            </marker>
+                        </defs>
+                        <rect width="1000" height="550" fill="#ffffff" stroke="#262626" stroke-width="1" />
+
+                        <!-- UML CLASSES -->
+                        <!-- User (Base Class) -->
+                        <g class="uml-class" id="class_user">
+                            <rect x="220" y="30" width="180" height="110" rx="4" />
+                            <line x1="220" y1="55" x2="400" y2="55" stroke="#262626" stroke-width="1" />
+                            <line x1="220" y1="100" x2="400" y2="100" stroke="#262626" stroke-width="1" />
+                            <text x="310" y="48" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">User (Abstract)</text>
+                            <text x="230" y="70" font-family="Arial" font-size="9.5"># userId : String</text>
+                            <text x="230" y="82" font-family="Arial" font-size="9.5"># name : String</text>
+                            <text x="230" y="94" font-family="Arial" font-size="9.5"># email : String</text>
+                            <text x="230" y="115" font-family="Arial" font-size="9.5">+ login() : boolean</text>
+                            <text x="230" y="127" font-family="Arial" font-size="9.5">+ logout() : void</text>
+                        </g>
+
+                        <!-- Farmer -->
+                        <g class="uml-class" id="class_farmer">
+                            <rect x="60" y="210" width="200" height="130" rx="4" />
+                            <line x1="60" y1="235" x2="260" y2="235" stroke="#262626" stroke-width="1" />
+                            <line x1="60" y1="280" x2="260" y2="280" stroke="#262626" stroke-width="1" />
+                            <text x="160" y="228" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">Farmer</text>
+                            <text x="70" y="250" font-family="Arial" font-size="9.5">+ farmLocation : String</text>
+                            <text x="70" y="262" font-family="Arial" font-size="9.5">+ phone : String</text>
+                            <text x="70" y="274" font-family="Arial" font-size="9.5">- livestock : List&lt;Livestock&gt;</text>
+                            <text x="70" y="295" font-family="Arial" font-size="9.5">+ addLivestock(l : Livestock)</text>
+                            <text x="70" y="307" font-family="Arial" font-size="9.5">+ receiveAlert(a : Alert)</text>
+                            <text x="70" y="319" font-family="Arial" font-size="9.5">+ getPhone() : String</text>
+                        </g>
+
+                        <!-- SystemAdmin -->
+                        <g class="uml-class" id="class_admin">
+                            <rect x="300" y="210" width="190" height="130" rx="4" />
+                            <line x1="300" y1="235" x2="490" y2="235" stroke="#262626" stroke-width="1" />
+                            <line x1="300" y1="280" x2="490" y2="280" stroke="#262626" stroke-width="1" />
+                            <text x="395" y="228" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">SystemAdmin</text>
+                            <text x="310" y="250" font-family="Arial" font-size="9.5">+ role : String</text>
+                            <text x="310" y="262" font-family="Arial" font-size="9.5">+ privilegeLevel : int</text>
+                            <text x="310" y="295" font-family="Arial" font-size="9.5">+ registerFarmer(f : Farmer)</text>
+                            <text x="310" y="307" font-family="Arial" font-size="9.5">+ registerDevice(d : Device)</text>
+                            <text x="310" y="319" font-family="Arial" font-size="9.5">+ assignDevice(l, d)</text>
+                        </g>
+
+                        <!-- Livestock -->
+                        <g class="uml-class" id="class_livestock">
+                            <rect x="540" y="210" width="200" height="150" rx="4" />
+                            <line x1="540" y1="235" x2="740" y2="235" stroke="#262626" stroke-width="1" />
+                            <line x1="540" y1="295" x2="740" y2="295" stroke="#262626" stroke-width="1" />
+                            <text x="640" y="228" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">Livestock</text>
+                            <text x="550" y="250" font-family="Arial" font-size="9.5">+ livestockId : String</text>
+                            <text x="550" y="262" font-family="Arial" font-size="9.5">+ species : String</text>
+                            <text x="550" y="274" font-family="Arial" font-size="9.5">+ age : int</text>
+                            <text x="550" y="286" font-family="Arial" font-size="9.5">+ status : String</text>
+                            <text x="550" y="310" font-family="Arial" font-size="9.5">+ updateStatus(s : String)</text>
+                            <text x="550" y="322" font-family="Arial" font-size="9.5">+ assignDevice(d : Device)</text>
+                            <text x="550" y="334" font-family="Arial" font-size="9.5">+ checkGeofence(la, lo) : bool</text>
+                        </g>
+
+                        <!-- Device -->
+                        <g class="uml-class" id="class_device">
+                            <rect x="785" y="210" width="180" height="130" rx="4" />
+                            <line x1="785" y1="235" x2="965" y2="235" stroke="#262626" stroke-width="1" />
+                            <line x1="785" y1="280" x2="965" y2="280" stroke="#262626" stroke-width="1" />
+                            <text x="875" y="228" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">Device</text>
+                            <text x="795" y="250" font-family="Arial" font-size="9.5">+ deviceId : String</text>
+                            <text x="795" y="262" font-family="Arial" font-size="9.5">+ batteryLevel : int</text>
+                            <text x="795" y="274" font-family="Arial" font-size="9.5">+ status : String</text>
+                            <text x="795" y="295" font-family="Arial" font-size="9.5">+ transmitData(la, lo) : SData</text>
+                            <text x="795" y="307" font-family="Arial" font-size="9.5">+ updateBattery(b : int)</text>
+                            <text x="795" y="319" font-family="Arial" font-size="9.5">+ getStatus() : String</text>
+                        </g>
+
+                        <!-- Alert -->
+                        <g class="uml-class" id="class_alert">
+                            <rect x="540" y="405" width="200" height="120" rx="4" />
+                            <line x1="540" y1="430" x2="740" y2="430" stroke="#262626" stroke-width="1" />
+                            <line x1="540" y1="480" x2="740" y2="480" stroke="#262626" stroke-width="1" />
+                            <text x="640" y="423" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">Alert</text>
+                            <text x="550" y="445" font-family="Arial" font-size="9.5">+ alertId : String</text>
+                            <text x="550" y="457" font-family="Arial" font-size="9.5">+ alertType : String</text>
+                            <text x="550" y="469" font-family="Arial" font-size="9.5">+ isResolved : boolean</text>
+                            <text x="550" y="495" font-family="Arial" font-size="9.5">+ triggerAlert() : void</text>
+                            <text x="550" y="507" font-family="Arial" font-size="9.5">+ resolveAlert() : void</text>
+                        </g>
+
+                        <!-- SensorData -->
+                        <g class="uml-class" id="class_sensordata">
+                            <rect x="785" y="405" width="180" height="120" rx="4" />
+                            <line x1="785" y1="430" x2="965" y2="430" stroke="#262626" stroke-width="1" />
+                            <line x1="785" y1="480" x2="965" y2="480" stroke="#262626" stroke-width="1" />
+                            <text x="875" y="423" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">SensorData</text>
+                            <text x="795" y="445" font-family="Arial" font-size="9.5">+ dataId : String</text>
+                            <text x="795" y="457" font-family="Arial" font-size="9.5">+ latitude : double</text>
+                            <text x="795" y="469" font-family="Arial" font-size="9.5">+ longitude : double</text>
+                            <text x="795" y="495" font-family="Arial" font-size="9.5">+ getCoordinates() : String</text>
+                            <text x="795" y="507" font-family="Arial" font-size="9.5">+ getTimestamp() : Date</text>
+                        </g>
+
+                        <!-- UML RELATIONSHIPS -->
+                        <!-- Generalization: Farmer -> User -->
+                        <g class="uml-relation" data-source="class_farmer" data-target="class_user">
+                            <path d="M 160,210 L 160,170 L 310,170 L 310,150" fill="none" stroke="#262626" stroke-width="1" marker-end="url(#hollow-arrow)" />
+                        </g>
+                        <!-- Generalization: SystemAdmin -> User -->
+                        <g class="uml-relation" data-source="class_admin" data-target="class_user">
+                            <path d="M 395,210 L 395,170 L 310,170 L 310,150" fill="none" stroke="#262626" stroke-width="1" marker-end="url(#hollow-arrow)" />
+                        </g>
+                        <!-- Aggregation: Farmer owns Livestock -->
+                        <g class="uml-relation" data-source="class_farmer" data-target="class_livestock">
+                            <path d="M 260,260 L 540,260" fill="none" stroke="#262626" stroke-width="1" marker-start="url(#diamond)" />
+                            <text x="275" y="253" font-family="Arial" font-size="10" font-weight="bold">1</text>
+                            <text x="515" y="253" font-family="Arial" font-size="10" font-weight="bold">0..*</text>
+                        </g>
+                        <!-- Association: Livestock <-> Device -->
+                        <g class="uml-relation" data-source="class_livestock" data-target="class_device">
+                            <path d="M 740,260 L 785,260" fill="none" stroke="#262626" stroke-width="1" />
+                            <text x="748" y="253" font-family="Arial" font-size="10" font-weight="bold">1</text>
+                            <text x="770" y="253" font-family="Arial" font-size="10" font-weight="bold">1</text>
+                        </g>
+                        <!-- Association: Device -> SensorData -->
+                        <g class="uml-relation" data-source="class_device" data-target="class_sensordata">
+                            <path d="M 875,340 L 875,405" fill="none" stroke="#262626" stroke-width="1" />
+                            <text x="880" y="355" font-family="Arial" font-size="10" font-weight="bold">1</text>
+                            <text x="880" y="395" font-family="Arial" font-size="10" font-weight="bold">0..*</text>
+                        </g>
+                        <!-- Association: Livestock -> Alert -->
+                        <g class="uml-relation" data-source="class_livestock" data-target="class_alert">
+                            <path d="M 640,360 L 640,405" fill="none" stroke="#262626" stroke-width="1" />
+                            <text x="645" y="375" font-family="Arial" font-size="10" font-weight="bold">1</text>
+                            <text x="645" y="395" font-family="Arial" font-size="10" font-weight="bold">0..*</text>
+                        </g>
+                        <!-- Association: Farmer receives Alert -->
+                        <g class="uml-relation" data-source="class_farmer" data-target="class_alert">
+                            <path d="M 160,340 L 160,465 L 540,465" fill="none" stroke="#262626" stroke-width="1" />
+                            <text x="170" y="355" font-family="Arial" font-size="10" font-weight="bold">1</text>
+                            <text x="515" y="458" font-family="Arial" font-size="10" font-weight="bold">0..*</text>
+                        </g>
+                    </svg>
+                </div>
+                <div class="diagram-caption">Figure 2: UML Class Diagram for Smart Livestock Monitoring Domain Model</div>
+
+                <h3>Relationship Design Justifications</h3>
+                <ul>
+                    <li><strong>Inheritance (Generalization)</strong>: <code>Farmer</code> and <code>SystemAdmin</code> extend the abstract <code>User</code> class, reusing profile authentication capabilities.</li>
+                    <li><strong>Aggregation</strong>: <code>Farmer</code> holds a collection of <code>Livestock</code> records. Livestock can exist independent of a single farmer registry (e.g. transfer between cooperative members).</li>
+                    <li><strong>1:1 Composition/Association</strong>: Each <code>Livestock</code> animal is associated with exactly one tracking <code>Device</code> collar at any instance.</li>
+                    <li><strong>1:M Associations</strong>: A tracking <code>Device</code> records sequential <code>SensorData</code> historical records. A <code>Livestock</code> animal generates multiple transactional <code>Alert</code> reports.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SECTION 3: JAVA IMPLEMENTATION -->
+        <div class="tab-content active" id="java">
+            <div class="writeup-paper section-page">
+                <h2>3. Java Implementation</h2>
+                <p>
+                    The following Java classes represent the physical implementation of the core domain layer modeled in the UML design: <code>Device</code>, <code>Livestock</code>, and <code>Farmer</code>.
+                </p>
+
+                <!-- Class 1: Device -->
+                <h3>3.1 Device Class</h3>
+                <div class="code-block"><span class="j-keyword">package</span> com.iot.livestock;
+
+<span class="j-keyword">import</span> java.util.Date;
+
+<span class="j-keyword">public class</span> <span class="j-class">Device</span> {
+    <span class="j-keyword">private</span> String deviceId;
+    <span class="j-keyword">private int</span> batteryLevel;
+    <span class="j-keyword">private</span> String status;
+
+    <span class="j-comment">// Constructor</span>
+    <span class="j-keyword">public</span> <span class="j-class">Device</span>(String deviceId) {
+        <span class="j-keyword">this</span>.deviceId = deviceId;
+        <span class="j-keyword">this</span>.batteryLevel = 100;
+        <span class="j-keyword">this</span>.status = <span class="j-string">"ACTIVE"</span>;
+    }
+
+    <span class="j-comment">// Method 1: Transmit data to the central system</span>
+    <span class="j-keyword">public</span> <span class="j-class">SensorData</span> transmitData(<span class="j-keyword">double</span> latitude, <span class="j-keyword">double</span> longitude) {
+        <span class="j-keyword">if</span> (<span class="j-keyword">this</span>.batteryLevel &lt; 5) {
+            <span class="j-keyword">this</span>.status = <span class="j-string">"LOW_POWER"</span>;
+        }
+        <span class="j-keyword">return new</span> <span class="j-class">SensorData</span>(String.valueOf(System.currentTimeMillis()), latitude, longitude);
+    }
+
+    <span class="j-comment">// Method 2: Update battery status from sensor reporting</span>
+    <span class="j-keyword">public void</span> updateBattery(<span class="j-keyword">int</span> newBatteryLevel) {
+        <span class="j-keyword">this</span>.batteryLevel = Math.max(0, Math.min(100, newBatteryLevel));
+        <span class="j-keyword">if</span> (<span class="j-keyword">this</span>.batteryLevel == 0) {
+            <span class="j-keyword">this</span>.status = <span class="j-string">"OFFLINE"</span>;
+        }
+    }
+
+    <span class="j-comment">// Getters</span>
+    <span class="j-keyword">public</span> String getDeviceId() { <span class="j-keyword">return</span> deviceId; }
+    <span class="j-keyword">public int</span> getBatteryLevel() { <span class="j-keyword">return</span> batteryLevel; }
+    <span class="j-keyword">public</span> String getStatus() { <span class="j-keyword">return</span> status; }
+}</div>
+
+                <!-- Class 2: Livestock -->
+                <h3>3.2 Livestock Class</h3>
+                <div class="code-block"><span class="j-keyword">package</span> com.iot.livestock;
+
+<span class="j-keyword">public class</span> <span class="j-class">Livestock</span> {
+    <span class="j-keyword">private</span> String livestockId;
+    <span class="j-keyword">private</span> String species;
+    <span class="j-keyword">private int</span> age;
+    <span class="j-keyword">private</span> String status;
+    <span class="j-keyword">private</span> <span class="j-class">Device</span> trackingDevice;
+
+    <span class="j-comment">// Constructor</span>
+    <span class="j-keyword">public</span> <span class="j-class">Livestock</span>(String livestockId, String species, <span class="j-keyword">int</span> age) {
+        <span class="j-keyword">this</span>.livestockId = livestockId;
+        <span class="j-keyword">this</span>.species = species;
+        <span class="j-keyword">this</span>.age = age;
+        <span class="j-keyword">this</span>.status = <span class="j-string">"NORMAL"</span>;
+    }
+
+    <span class="j-comment">// Method 1: Assign an IoT device collar</span>
+    <span class="j-keyword">public void</span> assignDevice(<span class="j-class">Device</span> device) {
+        <span class="j-keyword">this</span>.trackingDevice = device;
+    }
+
+    <span class="j-comment">// Method 2: Evaluate physical coordinates against a boundary</span>
+    <span class="j-keyword">public boolean</span> checkGeofence(<span class="j-keyword">double</span> lat, <span class="j-keyword">double</span> lng) {
+        <span class="j-comment">// Simulated bounding coordinates: Latitude [-20.1, -20.2], Longitude [28.5, 28.6]</span>
+        <span class="j-keyword">if</span> (lat &lt; -20.2 || lat &gt; -20.1 || lng &lt; 28.5 || lng &gt; 28.6) {
+            <span class="j-keyword">this</span>.status = <span class="j-string">"STRAYING"</span>;
+            <span class="j-keyword">return false</span>; <span class="j-comment">// Breached Geofence</span>
+        }
+        <span class="j-keyword">this</span>.status = <span class="j-string">"NORMAL"</span>;
+        <span class="j-keyword">return true</span>;
+    }
+
+    <span class="j-comment">// Getters and Setters</span>
+    <span class="j-keyword">public</span> String getLivestockId() { <span class="j-keyword">return</span> livestockId; }
+    <span class="j-keyword">public</span> String getStatus() { <span class="j-keyword">return</span> status; }
+    <span class="j-keyword">public void</span> setStatus(String status) { <span class="j-keyword">this</span>.status = status; }
+}</div>
+
+                <!-- Class 3: Farmer -->
+                <h3>3.3 Farmer Class</h3>
+                <div class="code-block"><span class="j-keyword">package</span> com.iot.livestock;
+
+<span class="j-keyword">import</span> java.util.ArrayList;
+<span class="j-keyword">import</span> java.util.List;
+
+<span class="j-keyword">public class</span> <span class="j-class">Farmer</span> {
+    <span class="j-keyword">private</span> String farmerId;
+    <span class="j-keyword">private</span> String name;
+    <span class="j-keyword">private</span> String phone;
+    <span class="j-keyword">private</span> List&lt;<span class="j-class">Livestock</span>&gt; livestock;
+
+    <span class="j-comment">// Constructor</span>
+    <span class="j-keyword">public</span> <span class="j-class">Farmer</span>(String farmerId, String name, String phone) {
+        <span class="j-keyword">this</span>.farmerId = farmerId;
+        <span class="j-keyword">this</span>.name = name;
+        <span class="j-keyword">this</span>.phone = phone;
+        <span class="j-keyword">this</span>.livestock = <span class="j-keyword">new</span> ArrayList&lt;&gt;();
+    }
+
+    <span class="j-comment">// Method 1: Register managed animal</span>
+    <span class="j-keyword">public void</span> addLivestock(<span class="j-class">Livestock</span> animal) {
+        <span class="j-keyword">if</span> (animal != null &amp;&amp; !<span class="j-keyword">this</span>.livestock.contains(animal)) {
+            <span class="j-keyword">this</span>.livestock.add(animal);
+        }
+    }
+
+    <span class="j-comment">// Method 2: Receive and display system warning notification</span>
+    <span class="j-keyword">public void</span> receiveAlert(<span class="j-class">Alert</span> alert) {
+        System.out.println(<span class="j-string">"SMS SENT TO "</span> + <span class="j-keyword">this</span>.phone + <span class="j-string">": ALERT! Animal ID "</span> 
+            + alert.getLivestockId() + <span class="j-string">" triggered alert type "</span> + alert.getAlertType());
+    }
+
+    <span class="j-comment">// Getters</span>
+    <span class="j-keyword">public</span> String getFarmerId() { <span class="j-keyword">return</span> farmerId; }
+    <span class="j-keyword">public</span> String getName() { <span class="j-keyword">return</span> name; }
+    <span class="j-keyword">public</span> List&lt;<span class="j-class">Livestock</span>&gt; getLivestock() { <span class="j-keyword">return</span> livestock; }
+}</div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: ERD DATABASE DESIGN -->
+        <div class="tab-content active" id="erd">
+            <div class="writeup-paper section-page">
+                <h2>4. Database Design (ERD)</h2>
+                <p class="brief-note">Hover over table entities to isolate their primary-to-foreign key relationships.</p>
+                <p>
+                    The database design provides a 3rd Normal Form schema layout mapping farmers, their livestock, associated collar tracking devices, the historical telemetry, and generated system alert events.
+                </p>
+
+                <div class="diagram-container">
+                    <svg width="1000" height="520" viewBox="0 0 1000 520">
+                        <rect width="1000" height="520" fill="#ffffff" stroke="#262626" stroke-width="1" />
+
+                        <!-- ERD TABLES -->
+                        <!-- FARMERS -->
+                        <g class="erd-entity" id="tb_farmers">
+                            <rect x="40" y="60" width="180" height="140" rx="3" />
+                            <rect x="40" y="60" width="180" height="30" rx="3" fill="#f5f5f5" />
+                            <line x1="40" y1="90" x2="220" y2="90" stroke="#262626" stroke-width="1" />
+                            <text x="130" y="80" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">FARMERS</text>
+                            <text x="50" y="110" font-family="Arial" font-size="10"><tspan class="pk-key">PK</tspan> farmer_id : VARCHAR(50)</text>
+                            <text x="50" y="125" font-family="Arial" font-size="10">name : VARCHAR(100)</text>
+                            <text x="50" y="140" font-family="Arial" font-size="10">phone : VARCHAR(20)</text>
+                            <text x="50" y="155" font-family="Arial" font-size="10">email : VARCHAR(100)</text>
+                        </g>
+
+                        <!-- LIVESTOCK -->
+                        <g class="erd-entity" id="tb_livestock">
+                            <rect x="380" y="60" width="200" height="160" rx="3" />
+                            <rect x="380" y="60" width="200" height="30" rx="3" fill="#f5f5f5" />
+                            <line x1="380" y1="90" x2="580" y2="90" stroke="#262626" stroke-width="1" />
+                            <text x="480" y="80" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">LIVESTOCK</text>
+                            <text x="390" y="110" font-family="Arial" font-size="10"><tspan class="pk-key">PK</tspan> livestock_id : VARCHAR(50)</text>
+                            <text x="390" y="125" font-family="Arial" font-size="10">species : VARCHAR(50)</text>
+                            <text x="390" y="140" font-family="Arial" font-size="10">age : INT</text>
+                            <text x="390" y="155" font-family="Arial" font-size="10">status : VARCHAR(20)</text>
+                            <text x="390" y="175" font-family="Arial" font-size="10"><tspan class="fk-key">FK</tspan> farmer_id : VARCHAR(50)</text>
+                        </g>
+
+                        <!-- DEVICES -->
+                        <g class="erd-entity" id="tb_devices">
+                            <rect x="740" y="60" width="220" height="160" rx="3" />
+                            <rect x="740" y="60" width="220" height="30" rx="3" fill="#f5f5f5" />
+                            <line x1="740" y1="90" x2="960" y2="90" stroke="#262626" stroke-width="1" />
+                            <text x="850" y="80" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">DEVICES</text>
+                            <text x="750" y="110" font-family="Arial" font-size="10"><tspan class="pk-key">PK</tspan> device_id : VARCHAR(50)</text>
+                            <text x="750" y="125" font-family="Arial" font-size="10">battery_level : INT</text>
+                            <text x="750" y="140" font-family="Arial" font-size="10">status : VARCHAR(20)</text>
+                            <text x="750" y="155" font-family="Arial" font-size="10">installed_date : DATE</text>
+                            <text x="750" y="175" font-family="Arial" font-size="10"><tspan class="fk-key">FK</tspan> livestock_id : VARCHAR(50) [UQ]</text>
+                        </g>
+
+                        <!-- SENSOR_DATA -->
+                        <g class="erd-entity" id="tb_sensordata">
+                            <rect x="740" y="320" width="220" height="160" rx="3" />
+                            <rect x="740" y="320" width="220" height="30" rx="3" fill="#f5f5f5" />
+                            <line x1="740" y1="350" x2="960" y2="350" stroke="#262626" stroke-width="1" />
+                            <text x="850" y="340" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">SENSOR_DATA</text>
+                            <text x="750" y="370" font-family="Arial" font-size="10"><tspan class="pk-key">PK</tspan> data_id : VARCHAR(50)</text>
+                            <text x="750" y="385" font-family="Arial" font-size="10">latitude : DECIMAL(9,6)</text>
+                            <text x="750" y="400" font-family="Arial" font-size="10">longitude : DECIMAL(9,6)</text>
+                            <text x="750" y="415" font-family="Arial" font-size="10">timestamp : TIMESTAMP</text>
+                            <text x="750" y="435" font-family="Arial" font-size="10"><tspan class="fk-key">FK</tspan> device_id : VARCHAR(50)</text>
+                        </g>
+
+                        <!-- ALERTS -->
+                        <g class="erd-entity" id="tb_alerts">
+                            <rect x="380" y="320" width="200" height="160" rx="3" />
+                            <rect x="380" y="320" width="200" height="30" rx="3" fill="#f5f5f5" />
+                            <line x1="380" y1="350" x2="580" y2="350" stroke="#262626" stroke-width="1" />
+                            <text x="480" y="340" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold">ALERTS</text>
+                            <text x="390" y="370" font-family="Arial" font-size="10"><tspan class="pk-key">PK</tspan> alert_id : VARCHAR(50)</text>
+                            <text x="390" y="385" font-family="Arial" font-size="10">alert_type : VARCHAR(50)</text>
+                            <text x="390" y="400" font-family="Arial" font-size="10">message : VARCHAR(255)</text>
+                            <text x="390" y="415" font-family="Arial" font-size="10">timestamp : TIMESTAMP</text>
+                            <text x="390" y="435" font-family="Arial" font-size="10"><tspan class="fk-key">FK</tspan> livestock_id : VARCHAR(50)</text>
+                        </g>
+
+                        <!-- RELATIONSHIP LINES & CROW'S FOOT SYMBOLS -->
+                        <!-- FARMERS to LIVESTOCK (1:M) -->
+                        <g class="erd-relation" data-source="tb_farmers" data-target="tb_livestock">
+                            <path d="M 220,120 L 380,120" stroke="#262626" stroke-width="1.2" fill="none" />
+                            <!-- One Side (Farmers) -->
+                            <line x1="230" y1="110" x2="230" y2="130" stroke="#262626" stroke-width="1.2" />
+                            <line x1="235" y1="110" x2="235" y2="130" stroke="#262626" stroke-width="1.2" />
+                            <!-- Many Side (Livestock) -->
+                            <line x1="380" y1="120" x2="370" y2="112" stroke="#262626" stroke-width="1.2" />
+                            <line x1="380" y1="120" x2="370" y2="128" stroke="#262626" stroke-width="1.2" />
+                            <line x1="370" y1="112" x2="370" y2="128" stroke="#262626" stroke-width="1.2" />
+                        </g>
+
+                        <!-- LIVESTOCK to DEVICES (1:1) -->
+                        <g class="erd-relation" data-source="tb_livestock" data-target="tb_devices">
+                            <path d="M 580,130 L 740,130" stroke="#262626" stroke-width="1.2" fill="none" />
+                            <!-- One Side (Livestock) -->
+                            <line x1="590" y1="120" x2="590" y2="140" stroke="#262626" stroke-width="1.2" />
+                            <line x1="595" y1="120" x2="595" y2="140" stroke="#262626" stroke-width="1.2" />
+                            <!-- One Side (Devices) -->
+                            <line x1="725" y1="120" x2="725" y2="140" stroke="#262626" stroke-width="1.2" />
+                            <line x1="730" y1="120" x2="730" y2="140" stroke="#262626" stroke-width="1.2" />
+                        </g>
+
+                        <!-- LIVESTOCK to ALERTS (1:M) -->
+                        <g class="erd-relation" data-source="tb_livestock" data-target="tb_alerts">
+                            <path d="M 480,220 L 480,320" stroke="#262626" stroke-width="1.2" fill="none" />
+                            <!-- One Side (Livestock) -->
+                            <line x1="470" y1="230" x2="490" y2="230" stroke="#262626" stroke-width="1.2" />
+                            <line x1="470" y1="235" x2="490" y2="235" stroke="#262626" stroke-width="1.2" />
+                            <!-- Many Side (Alerts) -->
+                            <line x1="480" y1="320" x2="472" y2="310" stroke="#262626" stroke-width="1.2" />
+                            <line x1="480" y1="320" x2="488" y2="310" stroke="#262626" stroke-width="1.2" />
+                            <line x1="472" y1="310" x2="488" y2="310" stroke="#262626" stroke-width="1.2" />
+                        </g>
+
+                        <!-- DEVICES to SENSOR_DATA (1:M) -->
+                        <g class="erd-relation" data-source="tb_devices" data-target="tb_sensordata">
+                            <path d="M 850,220 L 850,320" stroke="#262626" stroke-width="1.2" fill="none" />
+                            <!-- One Side (Devices) -->
+                            <line x1="840" y1="230" x2="860" y2="230" stroke="#262626" stroke-width="1.2" />
+                            <line x1="840" y1="235" x2="860" y2="235" stroke="#262626" stroke-width="1.2" />
+                            <!-- Many Side (SensorData) -->
+                            <line x1="850" y1="320" x2="842" y2="310" stroke="#262626" stroke-width="1.2" />
+                            <line x1="850" y1="320" x2="858" y2="310" stroke="#262626" stroke-width="1.2" />
+                            <line x1="842" y1="310" x2="858" y2="310" stroke="#262626" stroke-width="1.2" />
+                        </g>
+                    </svg>
+                </div>
+                <div class="diagram-caption">Figure 3: Entity Relationship Diagram (ERD) with Crow's Foot Notation</div>
+
+                <h3>Database Entity Profiles &amp; Constraints</h3>
+                
+                <table class="database-table">
+                    <thead>
+                        <tr>
+                            <th>Entity (Table)</th>
+                            <th>Relationship (Cardinality)</th>
+                            <th>Target Entity</th>
+                            <th>Primary Key</th>
+                            <th>Foreign Key &amp; Constraints</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>FARMERS</strong></td>
+                            <td>1 : Many</td>
+                            <td>LIVESTOCK</td>
+                            <td><code>farmer_id</code></td>
+                            <td>None</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LIVESTOCK</strong></td>
+                            <td>Many : 1</td>
+                            <td>FARMERS</td>
+                            <td><code>livestock_id</code></td>
+                            <td><code>farmer_id</code> references <code>FARMERS</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>DEVICES</strong></td>
+                            <td>1 : 1</td>
+                            <td>LIVESTOCK</td>
+                            <td><code>device_id</code></td>
+                            <td><code>livestock_id</code> references <code>LIVESTOCK</code> [UNIQUE]</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SENSOR_DATA</strong></td>
+                            <td>Many : 1</td>
+                            <td>DEVICES</td>
+                            <td><code>data_id</code></td>
+                            <td><code>device_id</code> references <code>DEVICES</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>ALERTS</strong></td>
+                            <td>Many : 1</td>
+                            <td>LIVESTOCK</td>
+                            <td><code>alert_id</code></td>
+                            <td><code>livestock_id</code> references <code>LIVESTOCK</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Normalization &amp; Integrity Rules</h3>
+                <ul>
+                    <li><strong>Referential Integrity</strong>: Foreign keys are strict mappings. Deleting a farmer cascade-deletes owning livestock entries. Disassociating a device clears its <code>livestock_id</code> relationship reference.</li>
+                    <li><strong>Unique Constraint [1:1]</strong>: The <code>livestock_id</code> column in <code>DEVICES</code> is set to <code>UNIQUE</code>, restricting a tracker to a single animal at any time.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- REFERENCES SECTION (Always visible at the end of report) -->
+        <div class="tab-content active" id="references">
+            <div class="writeup-paper section-page">
+                <div class="references">
+                    <h2>References</h2>
+                    <div class="reference-item">DeMarco, T. (1979). <i>Structured Analysis and System Specification</i>. Yourdon Press.</div>
+                    <div class="reference-item">Fowler, M. (2004). <i>UML Distilled: A Brief Guide to the Standard Object Modeling Language</i> (3rd ed.). Addison-Wesley.</div>
+                    <div class="reference-item">Elmasri, R., &amp; Navathe, S. B. (2015). <i>Fundamentals of Database Systems</i> (7th ed.). Pearson.</div>
+                    <div class="reference-item">Larman, C. (2004). <i>Applying UML and Patterns: An Introduction to Object-Oriented Analysis and Design and Iterative Development</i> (3rd ed.). Prentice Hall.</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
